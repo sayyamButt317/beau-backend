@@ -1,12 +1,12 @@
 import type { Request, Response } from "express";
-import ProductModel from "../Model/Product.ts";
+import ProductModel from "../Model/Product.js";
 import type {
   AddProductBody,
   DeleteProductBody,
   UpdateProductBody,
-} from "../Schema/Product_schema.ts";
-import { uploadImage, uploadVideo } from "./ImageController.ts";
-import { getErrorMessage } from "../Utils/error.ts";
+} from "../Schema/Product_schema.js";
+import { uploadImage, uploadVideo } from "./ImageController.js";
+import { getErrorMessage } from "../Utils/error.js";
 
 const getProductsController = async (
   _req: Request,

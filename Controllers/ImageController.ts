@@ -1,7 +1,7 @@
 import type { UploadApiResponse } from "cloudinary";
 import type { Request, Response } from "express";
-import { cloudinary } from "../Config/cloudinaryConfig.ts";
-import { getErrorMessage } from "../Utils/error.ts";
+import { cloudinary } from "../Config/cloudinaryConfig.js";
+import { getErrorMessage } from "../Utils/error.js";
 
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024; // 10 MB
 const MAX_VIDEO_BYTES = 100 * 1024 * 1024; // 100 MB

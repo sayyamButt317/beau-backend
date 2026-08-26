@@ -5,8 +5,9 @@
   "type": "module",
   "main": "App.ts",
   "scripts": {
-    "start": "node index.ts",
-    "dev": "node --watch index.ts"
+    "start": "tsx index.ts",
+    "dev": "tsx watch index.ts",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +29,9 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/morgan": "^1.9.10"
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^26.3.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
   }
 }

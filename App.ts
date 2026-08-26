@@ -2,8 +2,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import morgan from "morgan";
-import productRoutes from "./Routes/product.routes.ts";
-import { connectionDB } from "./db/connection.ts";
+import productRoutes from "./Routes/product.routes.js";
+import { connectionDB } from "./db/connection.js";
 
 const app = express();
 

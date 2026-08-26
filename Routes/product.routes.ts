@@ -4,8 +4,8 @@ import {
   addProductController,
   updateProductController,
   deleteProductController,
-} from "../Controllers/productController.ts";
-import { loginController, registerController } from "../Controllers/userController.ts";
+} from "../Controllers/productController.js";
+import { loginController, registerController } from "../Controllers/userController.js";
 
 const router = express.Router();
 

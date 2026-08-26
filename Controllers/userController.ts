@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import UserModel from "../Model/User.ts";
-import type { LoginBody, RegisterBody } from "../Schema/Auth_schema.ts";
-import { getErrorMessage } from "../Utils/error.ts";
+import UserModel from "../Model/User.js";
+import type { LoginBody, RegisterBody } from "../Schema/Auth_schema.js";
+import { getErrorMessage } from "../Utils/error.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
