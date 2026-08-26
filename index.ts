@@ -1,17 +1,16 @@
 import dotenv from "dotenv";
-import { app } from "./App.ts";
-import { connectionDB } from "./db/connection.ts";
+import app from "./App.ts";
 
-// Environment variable configuration
 dotenv.config({
   path: "./.env",
 });
 
-// Connect to MongoDB
-connectionDB()
-  .then(() => {
-    app.listen(process.env.PORT || 8000, () => {
-      console.log(`Server running on port ${process.env.PORT || 8000}`);
-    });
-  })
-  .catch((err) => console.log(`MongoDB connection failed`, err));
+// Local/dev only — Vercel uses the default export as a serverless function
+if (!process.env.VERCEL) {
+  const port = Number(process.env.PORT) || 8000;
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}
+
+export default app;

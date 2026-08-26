@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.ts",
+  "main": "App.ts",
   "scripts": {
-    "start": "node index.ts"
+    "start": "node index.ts",
+    "dev": "node --watch index.ts"
   },
   "author": "",
   "license": "ISC",
