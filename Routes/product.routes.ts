@@ -14,7 +14,7 @@ router.post("/register", registerController);
 router.post("/login", loginController);
 
 //Products Routes
-router.get("/getrecord", getProductsController);
+router.get("/products", getProductsController);
 router.post("/create", addProductController);
 router.post("/edit", updateProductController);
 router.post("/delete", deleteProductController);
