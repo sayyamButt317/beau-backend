@@ -20,17 +20,28 @@ const getProductsController = async (
   }
 };
 
+const uploadProductImages = async (
+  images: string[]
+): Promise<string[]> => {
+  const uploaded = await Promise.all(
+    images.map((image) =>
+      uploadImage(image, { folder: "products/images" })
+    )
+  );
+  return uploaded.map((result) => result.secure_url);
+};
+
 const addProductController = async (
   req: Request<unknown, unknown, AddProductBody>,
   res: Response
 ): Promise<void> => {
   try {
-    const { brandLogo, productImage, productVideo, ...productData } = req.body;
+    const { productImages, productVideo, ...productData } = req.body;
 
-    const [uploadedLogo, uploadedImage] = await Promise.all([
-      uploadImage(brandLogo, { folder: "products/logos" }),
-      uploadImage(productImage, { folder: "products/images" }),
-    ]);
+    let uploadedImageUrls: string[] = [];
+    if (productImages?.length) {
+      uploadedImageUrls = await uploadProductImages(productImages);
+    }
 
     let productVideoUrl: string | undefined;
     if (productVideo) {
@@ -42,8 +53,9 @@ const addProductController = async (
 
     const newProduct = new ProductModel({
       ...productData,
-      brandLogo: uploadedLogo.secure_url,
-      productImage: uploadedImage.secure_url,
+      ...(uploadedImageUrls.length
+        ? { productImages: uploadedImageUrls }
+        : {}),
       ...(productVideoUrl ? { productVideo: productVideoUrl } : {}),
     });
     await newProduct.save();
@@ -63,21 +75,11 @@ const updateProductController = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { _id, brandLogo, productImage, productVideo, ...rest } = req.body;
+    const { _id, productImages, productVideo, ...rest } = req.body;
     const updateData: Record<string, unknown> = { ...rest };
 
-    if (brandLogo) {
-      const uploadedLogo = await uploadImage(brandLogo, {
-        folder: "products/logos",
-      });
-      updateData.brandLogo = uploadedLogo.secure_url;
-    }
-
-    if (productImage) {
-      const uploadedImage = await uploadImage(productImage, {
-        folder: "products/images",
-      });
-      updateData.productImage = uploadedImage.secure_url;
+    if (productImages?.length) {
+      updateData.productImages = await uploadProductImages(productImages);
     }
 
     if (productVideo) {
@@ -126,8 +128,28 @@ const deleteProductController = async (
   }
 };
 
+const getProductByIdController = async (
+  req: Request<{ id: string }>,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const product = await ProductModel.findById(id);
+
+    if (!product) {
+      res.status(404).json({ status: 404, message: "Product not found" });
+      return;
+    }
+
+    res.status(200).json({ status: 200, data: product });
+  } catch (err: unknown) {
+    res.status(500).json({ message: getErrorMessage(err) });
+  }
+};
+
 export {
   getProductsController,
+  getProductByIdController,
   addProductController,
   updateProductController,
   deleteProductController,

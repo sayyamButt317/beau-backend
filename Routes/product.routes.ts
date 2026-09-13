@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getProductsController,
+  getProductByIdController,
   addProductController,
   updateProductController,
   deleteProductController,
@@ -15,6 +16,7 @@ router.post("/login", loginController);
 
 //Products Routes
 router.get("/products", getProductsController);
+router.get("/products/:id", getProductByIdController);
 router.post("/create", addProductController);
 router.post("/edit", updateProductController);
 router.post("/delete", deleteProductController);

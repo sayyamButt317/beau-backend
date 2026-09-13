@@ -33,8 +33,8 @@ const ProductSchema = new moongose.Schema(
       type: Number,
       required: true,
     },
-    productImage: {
-      type: String,
+    productImages: {
+      type: [String],
       required: [true, "Product Image is Required"],
     },
     productVideo: {
