@@ -8,41 +8,33 @@ const ProductSchema = new moongose.Schema(
     },
     brandName: {
       type: String,
-      required: [true, "Brand Name is Required"],
     },
     brandLogo: {
       type: String,
-      required: [true, "Brand Logo is Required"],
     },
     productDescription: {
       type: String,
-      required: [true, "Product Description is Required"],
     },
     Price: {
       type: String,
-      required: [true, "Price is Required"],
     },
     discountedPrice: {
       type: String,
     },
     Category: {
       type: String,
-      required: true,
     },
     amountInStock: {
       type: Number,
-      required: true,
     },
     productImages: {
       type: [String],
-      required: [true, "Product Image is Required"],
     },
     productVideo: {
       type: String,
     },
     productGradeCode: {
       type: String,
-      required: [true, "Product Grade Code is Required"],
     },
   },
   { timestamps: true }
