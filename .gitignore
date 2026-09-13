@@ -2,8 +2,6 @@
 node_modules/
 
 # Environment & secrets
-.env
-.env.*
 !.env.example
 
 # Logs
@@ -26,7 +24,6 @@ Desktop.ini
 
 # IDE / editor
 .idea/
-.vscode/
 *.swp
 *.swo
 
@@ -34,3 +31,4 @@ Desktop.ini
 uploads/
 tmp/
 temp/
+config.bat
